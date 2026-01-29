@@ -1,3 +1,5 @@
+#ifndef SETUP_H_
+#define SETUP_H_
 
 #include "driver/i2s_std.h"
 #include <math.h>
@@ -55,3 +57,6 @@ void i2s_init(i2s_chan_handle_t* chan1, i2s_chan_handle_t* chan2);
  * @param buffer_size Size of output buffer.
  */
 void test_output(int32_t* output, size_t buffer_size);
+
+
+#endif

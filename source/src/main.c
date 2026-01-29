@@ -1,4 +1,5 @@
 #include "setup.h"
+#include "delay.h"
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -29,15 +30,11 @@ void app_main() {
         i2s_channel_read(input_handle, input_buffer, sizeof(input_buffer), &bytes_read, portMAX_DELAY);
 
         for (int i = 0; i < bytes_read/8; i++) {
-                // By I2S protocol 24bits of data is in 32bit with 0 padding
-                int32_t left = input_buffer[i*2];
-                int32_t right = input_buffer[i*2+1];
+                // In I2S protocol 24bits of data is 0 padded to 32bit
+                int32_t left = input_buffer[i*2] >> 8;
+                int32_t right = input_buffer[i*2+1] >> 8;
 
-                // DSP will be done on this values
-                left >>= 8;
-                right >>= 8;
-                
-                // By I2S protocol 24bits of data need to be in 32bit with 0 padding
+                // In I2S protocol 24bits of data needs to be in 32bit format with 0 padding
                 output_buffer[i*2] = left << 8;
                 output_buffer[i*2+1] = right << 8;
         }
