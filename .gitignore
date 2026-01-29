@@ -1,0 +1,10 @@
+.vscode/c_cpp_properties.json
+test_program
+datasheet
+source/.pio
+source/.vscode/.browse.c_cpp.db*
+source/.vscode/c_cpp_properties.json
+source/.vscode/launch.json
+source/.vscode/ipch
+source/sdkconfig.upesy_wrover
+source/test
