@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <math.h>
+#include <string.h>
 
 #define DELAY_BUFFER_SIZE 32768
 #define REVERB_BUFFER_SIZE 32768

@@ -1,5 +1,4 @@
 #include "delay.h"
-#include <string.h>
 
 int32_t reverb_buffer[DELAY_BUFFER_SIZE];
 static uint16_t dbuff_read_index = 0;

@@ -7,15 +7,21 @@ The audio signal is digitized using a **PCM1808 24-bit audio ADC**, processed in
 ---
 
 ## Tools
-- **Platform** io vscode extension
-- **framework**: ESP-IDF
-- **platform**: espressif32
-- **board**: ESP32-wroover
+- **PlatformIO**: vscode extension
+- **Framework**: ESP-IDF
+- **Platform**: espressif32
+- **Board**: ESP32-WROOM-32
+- **Modules**: PCM1808, PCM5102
 
 ---
 
 ## Compile
-- Add Platform IO extension to your vs code.
-- PlatformIo --> Home --> Open project
+- Add PlatformIO extension to your vs code.
+- PlatformIO --> Home --> Open project
 - Select "source" directory.
-- PlatformIo generates needed dependcies and allows upload to ESP32.
+- PlatformIO generates needed dependcies and allows upload to ESP32.
+
+---
+
+## Scheme
+![Project_scheme](scheme/scheme.png)
