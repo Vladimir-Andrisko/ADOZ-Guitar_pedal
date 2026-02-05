@@ -1,4 +1,4 @@
-#include "setup.h"
+#include "protocol_setup.h"
 
 i2s_chan_config_t input_chan_cfg = I2S_CHANNEL_DEFAULT_CONFIG(I2S_NUM_0, I2S_ROLE_MASTER);
 i2s_chan_config_t output_chan_cfg = I2S_CHANNEL_DEFAULT_CONFIG(I2S_NUM_1, I2S_ROLE_MASTER);
@@ -8,10 +8,10 @@ i2s_std_config_t input_i2s_cfg = {
     .slot_cfg = PCM1808_I2S_SLOT_CONFIG(I2S_DATA_BIT_WIDTH_32BIT, I2S_SLOT_MODE_STEREO),
     .gpio_cfg = {
         .mclk = GPIO_NUM_0,
-        .bclk = GPIO_NUM_25,
-        .ws = GPIO_NUM_27,
+        .bclk = GPIO_NUM_16,
+        .ws = GPIO_NUM_18,
         .dout = I2S_GPIO_UNUSED,
-        .din = GPIO_NUM_26,
+        .din = GPIO_NUM_17,
         .invert_flags = {
             .mclk_inv = false,
             .bclk_inv = false,
@@ -25,9 +25,9 @@ i2s_std_config_t output_i2s_cfg = {
     .slot_cfg = PCM5102_I2S_SLOT_CONFIG(I2S_DATA_BIT_WIDTH_32BIT, I2S_SLOT_MODE_STEREO),
     .gpio_cfg = {
         .mclk = I2S_GPIO_UNUSED,
-        .bclk = GPIO_NUM_13,
-        .ws   = GPIO_NUM_12,
-        .dout  = GPIO_NUM_14,
+        .bclk = GPIO_NUM_21,
+        .ws   = GPIO_NUM_22,
+        .dout  = GPIO_NUM_23,
         .din  = I2S_GPIO_UNUSED,
         .invert_flags = {
             .mclk_inv = false,

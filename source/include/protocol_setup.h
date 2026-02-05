@@ -1,5 +1,5 @@
-#ifndef SETUP_H_
-#define SETUP_H_
+#ifndef PROTOCOL_SETUP_H_
+#define PROTOCOL_SETUP_H_
 
 #include "driver/i2s_std.h"
 #include <math.h>

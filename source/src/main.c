@@ -1,4 +1,5 @@
-#include "setup.h"
+#include "protocol_setup.h"
+#include "distortion.h"
 #include "delay.h"
 
 #include "freertos/FreeRTOS.h"
@@ -25,18 +26,22 @@ void app_main() {
     // Allow some time for init to finnish.
     vTaskDelay(pdMS_TO_TICKS(500));
 
+
+    echo_init(15000, 0.8);
+    reverb_init(15000, 0.8);
+
     while(1){
         
         i2s_channel_read(input_handle, input_buffer, sizeof(input_buffer), &bytes_read, portMAX_DELAY);
 
         for (int i = 0; i < bytes_read/8; i++) {
                 // In I2S protocol 24bits of data is 0 padded to 32bit
-                int32_t left = input_buffer[i*2] >> 8;
-                int32_t right = input_buffer[i*2+1] >> 8;
+                int32_t left = input_buffer[i*2];
+                int32_t right = input_buffer[i*2+1];
 
                 // In I2S protocol 24bits of data needs to be in 32bit format with 0 padding
-                output_buffer[i*2] = left << 8;
-                output_buffer[i*2+1] = right << 8;
+                output_buffer[i*2] = left;
+                output_buffer[i*2+1] = right;
         }
 
         i2s_channel_write(output_handle, output_buffer, sizeof(output_buffer), &bytes_written, portMAX_DELAY);

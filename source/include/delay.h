@@ -5,8 +5,8 @@
 #include <math.h>
 #include <string.h>
 
-#define DELAY_BUFFER_SIZE 32768
-#define REVERB_BUFFER_SIZE 32768
+#define DELAY_BUFFER_SIZE 16384
+#define REVERB_BUFFER_SIZE 16384
 #define MAX_DELAY (DELAY_BUFFER_SIZE - 1)
 
 /**
