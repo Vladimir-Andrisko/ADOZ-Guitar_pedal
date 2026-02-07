@@ -1,6 +1,7 @@
 #include "protocol_setup.h"
 #include "distortion.h"
 #include "delay.h"
+#include "filter.h"
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -25,10 +26,6 @@ void app_main() {
     i2s_init(&input_handle, &output_handle);
     // Allow some time for init to finnish.
     vTaskDelay(pdMS_TO_TICKS(500));
-
-
-    echo_init(15000, 0.8);
-    reverb_init(15000, 0.8);
 
     while(1){
         
