@@ -21,7 +21,7 @@ static inline int64_t signed_multiply_subtract(int64_t sum, int32_t op1, int32_t
     return (int64_t)ret;
 }
 
-int32_t first_order_IIR(int32_t input, int32_t *coeff, int32_t *x_history, int32_t *y_history){
+int32_t first_order_IIR(int32_t input, int32_t *coeff){
     int64_t acc = 0;
 
     acc = signed_multiply_accumulate(acc, coeff[0], input);         // A0 * x(n)
@@ -37,7 +37,7 @@ int32_t first_order_IIR(int32_t input, int32_t *coeff, int32_t *x_history, int32
     return output;
 }
 
-int32_t second_order_IIR(int32_t input, int32_t *coeff, int32_t *x_history, int32_t *y_history){
+int32_t second_order_IIR(int32_t input, int32_t *coeff){
     int64_t acc = 0;
 
     acc = signed_multiply_accumulate(acc, coeff[0], input);         // A0 * x(n)
@@ -58,4 +58,47 @@ int32_t second_order_IIR(int32_t input, int32_t *coeff, int32_t *x_history, int3
     y_history[0] = output;
 
     return output;
+}
+
+
+int32_t shelvingLP(int32_t input, int32_t *coeff, float k){
+    int64_t output = 0;
+
+    int32_t filtered = first_order_IIR(input, coeff);
+
+    output += (((int64_t)filtered + (int64_t)input) >> 1);
+    output += (((int64_t)input - (int64_t)filtered) >> 1)*k;
+
+    if(output > INT32_MAX) output = INT32_MAX;
+    if(output < INT32_MIN) output = INT32_MIN;
+
+    return (int32_t)output;
+}
+
+int32_t shelvingHP(int32_t input, int32_t *coeff, float k){
+    int64_t output = 0;
+
+    int32_t filtered = first_order_IIR(input, coeff);
+
+    output += (((int64_t)filtered + (int64_t)input) >> 1)*k;
+    output += (((int64_t)input - (int64_t)filtered) >> 1);
+
+    if(output > INT32_MAX) output = INT32_MAX;
+    if(output < INT32_MIN) output = INT32_MIN;
+
+    return (int32_t)output;
+}
+
+int32_t shelvingPeak(int32_t input, int32_t *coeff, float k){
+    int64_t output = 0;
+
+    int32_t filtered = second_order_IIR(input, coeff);
+
+    output += (((int64_t)filtered + (int64_t)input) >> 1);
+    output += (((int64_t)input - (int64_t)filtered) >> 1)*k;
+
+    if(output > INT32_MAX) output = INT32_MAX;
+    if(output < INT32_MIN) output = INT32_MIN;
+
+    return (int32_t)output;
 }
