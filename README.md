@@ -7,21 +7,51 @@ The audio signal is digitized using a **PCM1808 24-bit audio ADC**, processed in
 ---
 
 ## Tools
-- **PlatformIO**: vscode extension
+- **PlatformIO**: VS code extension
 - **Framework**: ESP-IDF
 - **Platform**: espressif32
 - **Board**: ESP32-WROVER
-- **Modules**: PCM1808, PCM5102
+- **Modules**: PCM1808 (ADC), PCM5102 (DAC)
+- **Display**: Picocom
 
 ---
 
 ## Compile
-- Add PlatformIO extension to your vs code.
-- PlatformIO --> Home --> Open project
-- Select "source" directory.
-- PlatformIO generates needed dependcies and allows upload to ESP32.
+1. Add PlatformIO extension to your VS code.
+2. Open PlatformIO --> Home --> Open project.
+3. Select the "source" directory of the project.
+4. PlatformIO generates needed dependcies.
+5. Use PlatformIO to build and upload the firmware to your ESP32.
 
 ---
 
-## Scheme
+## Monitoring effect settings via UART
+ESP32 prints all effect states over UART. To monitor them:
+
+1. Install picocom on Linux:
+
+```
+sudo apt update
+sudo apt install picocom
+```
+
+2. Check which USB port your ESP32 is connected to:
+
+```ls /dev/ttyUSB*```
+
+3. Run picocom with the correct port:
+
+```picocom -b 115200 /dev/ttyUSB{port number}```
+
+To exit picocom, press:
+
+```CTRL+a then CTRL+x```
+
+---
+
+## Hardware Scheme
+
+This diagram shows the wiring between the ESP32 and the audio
+modules. Potentiometers and buttons used for effect control are not shown.
+
 ![Project_scheme](scheme/scheme.png)
