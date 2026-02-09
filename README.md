@@ -37,15 +37,21 @@ sudo apt install picocom
 
 2. Check which USB port your ESP32 is connected to:
 
-```ls /dev/ttyUSB*```
+```
+ls /dev/ttyUSB*
+```
 
 3. Run picocom with the correct port:
 
-```picocom -b 115200 /dev/ttyUSB{port number}```
+```
+picocom -b 115200 /dev/ttyUSB{port number}
+```
 
 To exit picocom, press:
 
-```CTRL+a then CTRL+x```
+```
+CTRL+a then CTRL+x
+```
 
 ---
 
