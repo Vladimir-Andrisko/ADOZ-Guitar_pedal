@@ -75,8 +75,7 @@ void set_reverb(uint16_t new_delay, float gain){
     rbuff_read_index = (rbuff_write_index + DELAY_BUFFER_SIZE - reverb_delay) & MAX_DELAY;
 }
 
-int32_t echo_sample(int32_t input)
-{
+int32_t echo_sample(int32_t input){
 
     delay_buffer[dbuff_write_index++] = input;
     dbuff_write_index &= MAX_DELAY;

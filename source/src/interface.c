@@ -139,7 +139,7 @@ void interface_task(void *param){
             print_effect();
         }
 
-        vTaskDelay(50 / portTICK_PERIOD_MS);
-        time += 50;
+        vTaskDelay(100 / portTICK_PERIOD_MS);
+        time += 100;
     }
 }

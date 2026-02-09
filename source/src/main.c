@@ -49,7 +49,6 @@ void app_main() {
         taskEXIT_CRITICAL(&effect_state_mux);
 
         for (int i = 0; i < bytes_read/8; i++) {
-                // In I2S protocol 24bits of data is 0 padded to 32bit
                 int32_t left = input_buffer[i*2];
                 int32_t right = input_buffer[i*2+1];
 
@@ -62,7 +61,7 @@ void app_main() {
                     left = distort_sample(left);
                 }
                 else if(local_state.enabled[OVERDRIVE]){   // Overdrive and distortion cant be applied at the same time
-                    left = distort_sample(left);
+                    left = overdrive_sample(left);
                 }
 
                 if(local_state.enabled[LOW_PASS]){
@@ -86,7 +85,6 @@ void app_main() {
                     left = reverb_sample(left);
                 }
 
-                // In I2S protocol 24bits of data needs to be in 32bit format with 0 padding
                 output_buffer[i*2] = left;
                 output_buffer[i*2+1] = right;
         }
