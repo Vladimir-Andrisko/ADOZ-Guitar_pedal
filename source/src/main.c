@@ -36,7 +36,6 @@ void app_main() {
     vTaskDelay(pdMS_TO_TICKS(500));
     echo_init(0.0, 0.0);
     reverb_init(0.0, 0.0);
-    distortion_set_gain(0.0);
 
     xTaskCreatePinnedToCore(interface_task, "Interface", 5000, NULL, 1, &interface_handle, 1);
 
@@ -58,10 +57,10 @@ void app_main() {
                 }
 
                 if(local_state.enabled[DISTORTION]){
-                    left = distort_sample(left);
+                    left = distort_sample(left, local_state.gain[DISTORTION]);
                 }
                 else if(local_state.enabled[OVERDRIVE]){   // Overdrive and distortion cant be applied at the same time
-                    left = overdrive_sample(left);
+                    left = overdrive_sample(left, local_state.gain[OVERDRIVE]);
                 }
 
                 if(local_state.enabled[LOW_PASS]){

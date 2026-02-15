@@ -90,7 +90,7 @@ void readPot(){
     adc_oneshot_read(adc_handle, POT_LOG_R, &delay_read);
 
     if(effect_state.current_effect == DISTORTION || effect_state.current_effect == OVERDRIVE){
-        gain_value = (float)gain_read * 9.0f/4096.0f + 1;
+        gain_value = (float)gain_read * 49.0f/4096.0f + 1;
     }else if(effect_state.current_effect == ECHO || effect_state.current_effect == REVERB){
         gain_value = (float)gain_read/4096.0f;
         delay_value = (int16_t)((delay_read * MAX_DELAY) >> 12);

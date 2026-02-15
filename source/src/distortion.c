@@ -1,16 +1,8 @@
 #include "distortion.h"
 
-static float gain = 1.0;
 static float max_output = 0;
 
-void distortion_set_gain(float new_gain){
-    if(new_gain < 1.0) new_gain = 1.0;
-    if(new_gain > 100.0) new_gain = 100.0;
-
-    gain = new_gain;
-}
-
-int32_t distort_sample(int32_t input) {
+int32_t distort_sample(int32_t input, float gain) {
     float x = (float)input / 2147483648.0f;
     float abs_x = fabsf(x);
     if(abs_x > max_output) max_output = abs_x;
@@ -25,7 +17,7 @@ int32_t distort_sample(int32_t input) {
     return output;
 }
 
-int32_t overdrive_sample(int32_t input){
+int32_t overdrive_sample(int32_t input, float gain){
     float x = (float)input / 2147483648.0f;
     float abs_x = fabsf(x);
     if(abs_x > max_output) max_output = abs_x;
